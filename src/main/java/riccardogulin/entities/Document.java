@@ -15,9 +15,10 @@ public class Document {
 	private String code;
 
 	@OneToOne
-	@JoinColumn(name = "user_id", nullable = false)
+	@JoinColumn(name = "user_id", nullable = false, unique = true)
 	// Join Column identifica dove posizioniamo la chiave esterna
 	// Nullable = false serve per far si che non sia possibile NON inserire quel valore al suo interno
+	// Unique = true serve per garantire che non ci siano 2 documenti con lo stesso user_id
 	private User user;
 
 	public Document() {

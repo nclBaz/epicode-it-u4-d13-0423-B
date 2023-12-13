@@ -23,7 +23,7 @@ public class User {
 	private Document document;
 
 	@OneToMany(mappedBy = "user")
-	// 1 to Many diventa così BIDIREZIONALE
+	// 1 to Many diventa così BIDIREZIONALE (NON E' OBBLIGATORIO)
 	// Non verrà creata nessuna colonna aggiuntiva a DB
 	// La bidirezionalità mi servirà solo LATO JAVA per poter accedere
 	// da un utente alla lista dei blog che ha scritto
@@ -35,6 +35,14 @@ public class User {
 	public User(String firstName, String lastName) {
 		this.firstName = firstName;
 		this.lastName = lastName;
+	}
+
+	public List<BlogPost> getBlogPostList() {
+		return blogPostList;
+	}
+
+	public void setBlogPostList(List<BlogPost> blogPostList) {
+		this.blogPostList = blogPostList;
 	}
 
 	public long getId() {
