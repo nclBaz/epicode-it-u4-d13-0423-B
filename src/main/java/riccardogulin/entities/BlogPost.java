@@ -1,6 +1,7 @@
 package riccardogulin.entities;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "blogs")
@@ -15,6 +16,13 @@ public class BlogPost {
 	@JoinColumn(name = "user_id", nullable = false)
 	private User user; // <--- FOREIGN KEY
 
+	@ManyToMany
+	@JoinTable(name = "blogs_categories", // DEFINIAMO COME SARA' FATTA LA JUNCTION TABLE
+			joinColumns = @JoinColumn(name = "blog_id"), // DEFINIAMO I NOMI DELLE SUE COLONNE
+			inverseJoinColumns = @JoinColumn(name = "category_id"))
+	// QUESTA DEFINIZIONE DELLE COLONNE E' SPECULARE RISPETTO A QUELLA DEFINITA SU CATEGORIES
+	private List<Category> categoryList;
+
 	public BlogPost() {
 	}
 
@@ -22,6 +30,14 @@ public class BlogPost {
 		this.title = title;
 		this.content = content;
 		this.user = user;
+	}
+
+	public List<Category> getCategoryList() {
+		return categoryList;
+	}
+
+	public void setCategoryList(List<Category> categoryList) {
+		this.categoryList = categoryList;
 	}
 
 	public long getId() {
